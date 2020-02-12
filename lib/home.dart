@@ -31,15 +31,15 @@ class _HomeState extends State<Home> {
 
     if(sequencia % 8 == 0) { 
       // Pausa longa
-      current = timePausaLonga;
+      current = timePausaLonga * 60;
       texto = "20:00";
     } else if(sequencia % 2 == 0) {
       // Pausa curta
-      current = timePausaCurta;
+      current = timePausaCurta * 60;
       texto = "05:00";
     } else { 
       // 25:00 minutos
-      current = timePomodoro;
+      current = timePomodoro * 60;
       pomodoros++;
       texto = "25:00";
     }

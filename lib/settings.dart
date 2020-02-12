@@ -70,7 +70,7 @@ class _SettingsState extends State<Settings> {
             ),
             SizedBox(height: 20,),
             Center(
-              child: Text("All values must be in seconds."),
+              child: Text("All values must be in minutes."),
             ),
             SizedBox(height: 20,),
             RaisedButton(
