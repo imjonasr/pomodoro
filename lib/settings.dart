@@ -17,7 +17,9 @@ class _SettingsState extends State<Settings> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     //print(int.parse(_timePausaCurta.text));
-    prefs.setInt('pausaCurta', int.parse(_timePausaCurta.text));
+    prefs.setInt('timePausaCurta', int.parse(_timePausaCurta.text));
+    prefs.setInt('timePausaLonga', int.parse(_timePausaLonga.text));
+    prefs.setInt('timePomodoro', int.parse(_timePomodoro.text));
   }
 
   @override

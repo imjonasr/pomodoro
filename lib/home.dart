@@ -16,9 +16,9 @@ class _HomeState extends State<Home> {
   int sequencia = 1; // Sequencia de pomodoros
   int pomodoros = 0; // Quantidade de pomodoros feitos
 
-  int timePausaCurta = 5;
-  int timePausaLonga = 20;
-  int timePomodoro = 25;
+  int timePausaCurta = 5; // Tempo da pausa curta
+  int timePausaLonga = 20; // Tempo da pausa longa
+  int timePomodoro = 25; // Tempo do pomodoro
 
   void _modoPomodoro() {
 
@@ -31,18 +31,15 @@ class _HomeState extends State<Home> {
 
     if(sequencia % 8 == 0) { 
       // Pausa longa
-      //current = 60 * 20;
-      current = 20;
+      current = timePausaLonga;
       texto = "20:00";
     } else if(sequencia % 2 == 0) {
       // Pausa curta
-      current = 5;
-      //current = 60 * 5;
+      current = timePausaCurta;
       texto = "05:00";
     } else { 
       // 25:00 minutos
-      //current = 60 * 25;
-      current = 25;
+      current = timePomodoro;
       pomodoros++;
       texto = "25:00";
     }
@@ -53,9 +50,14 @@ class _HomeState extends State<Home> {
   _getValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    timePausaCurta = prefs.getInt('timePausaCurta');
-    timePausaLonga = prefs.getInt('timePausaLonga');
-    timePomodoro   = prefs.getInt('timePomodoro');
+    timePausaCurta = prefs.getInt('timePausaCurta') ?? 0;
+    timePausaLonga = prefs.getInt('timePausaLonga') ?? 0;
+    timePomodoro   = prefs.getInt('timePomodoro') ?? 0;
+
+    print(timePausaCurta);
+    print(timePausaLonga);
+    print(timePomodoro);
+
   }
 
   void _startTimer() {
@@ -114,6 +116,7 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Center(
               child: Text(
@@ -122,23 +125,52 @@ class _HomeState extends State<Home> {
                 style: TextStyle(fontSize: 64),
               ),
             ),
-            Text(
-              "Você já fez ${pomodoros}.",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.blueGrey,
+            Center(
+              child: Text(
+                "Você já fez $pomodoros pomodoros.",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w200,
+                  color: Colors.grey,
+                ),
               ),
             ),
+            
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepPurple,
-        onPressed: _modoPomodoro,
-        child: Icon(
-          Icons.play_arrow,
-          color: Colors.white,
-        ),
+      bottomNavigationBar: Row(
+        children: <Widget>[
+          Expanded(
+            child: RaisedButton(
+              padding: EdgeInsets.only(top: 15, bottom: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(0.0),
+                side: BorderSide(color: Colors.deepPurple)
+              ),
+              color: Colors.deepPurple,
+              child: Icon(Icons.play_arrow, color: Colors.white),
+              onPressed: _modoPomodoro,
+            ),
+          ),
+          Expanded(
+            child: RaisedButton(
+              padding: EdgeInsets.only(top: 15, bottom: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(0.0),
+               side: BorderSide(color: Colors.red)
+              ),
+              color: Colors.red,
+              child: Icon(Icons.stop, color: Colors.white),
+              onPressed: () {
+                _timer.cancel();
+                setState(() {
+                  pomodoros--;
+                });
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
