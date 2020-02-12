@@ -43,7 +43,7 @@ class _SettingsState extends State<Settings> {
               ),
               controller: _timePomodoro,
               decoration: InputDecoration(
-                labelText: "Tempo do Pomodoro:",
+                labelText: "Pomodoro time:",
               ),
             ),
             TextField(
@@ -54,7 +54,7 @@ class _SettingsState extends State<Settings> {
               ),
               controller: _timePausaCurta,
               decoration: InputDecoration(
-                labelText: "Tempo da Pausa Curta:",
+                labelText: "Short break time:",
               ),
             ),
             TextField(
@@ -65,18 +65,18 @@ class _SettingsState extends State<Settings> {
               ),
               controller: _timePausaLonga,
               decoration: InputDecoration(
-                labelText: "Tempo da Pausa Longa:",
+                labelText: "Long break time:",
               ),
             ),
             SizedBox(height: 20,),
             Center(
-              child: Text("Todos os valores devem ser em segundos."),
+              child: Text("All values must be in seconds."),
             ),
             SizedBox(height: 20,),
             RaisedButton(
               color: Colors.deepPurple,
               padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-              child: Text("Salvar"),
+              child: Text("Save"),
               onPressed: _saveSettings
             )
           ],

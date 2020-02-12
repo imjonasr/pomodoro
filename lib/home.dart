@@ -127,7 +127,7 @@ class _HomeState extends State<Home> {
             ),
             Center(
               child: Text(
-                "Você já fez $pomodoros pomodoros.",
+                "You already did $pomodoros pomodoros.",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w200,
